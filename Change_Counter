@@ -1,0 +1,67 @@
+/**********************************************************************
+	*Method Name    : XXXXXX
+	*Author         : Kevin Zwart 
+	*Due Date       : 7/15/2022
+	*Program Description: program will get a dollar amount input as a double
+	*from the user. The program will then calculate how to return the change
+	*using 10's 5's 1's , Quarters, Dimes, Nickels, and pennies.
+**********************************************************************/
+package register;
+
+import java.util.Scanner;
+
+public class Register 
+{  
+    public static void main(String[] args) 
+    {
+        double dollar_Amount;
+        double change_Tens;
+        double change_Fives;
+        double change_Ones;
+        double change_Quarters;
+        double change_Dimes;
+        double change_Nickels;
+        double change_Pennies;
+        double change_Amount;
+      
+        Scanner input = new Scanner(System.in); 
+        
+        System.out.println ("Please input a dollar amount.");
+        	dollar_Amount = input.nextDouble();
+         
+        change_Tens = dollar_Amount / 10.0;
+        dollar_Amount = dollar_Amount - ((int)change_Tens *10.0);
+        System.out.println(+ (int)change_Tens + "  ten dollar bills");
+       
+        change_Fives = dollar_Amount / 5;
+        dollar_Amount = dollar_Amount - ((int)change_Fives * 5.0);
+        System.out.println(+ (int)change_Fives + "  five dollar bills");
+        
+        change_Ones = (int)dollar_Amount;
+        System.out.println(+(int)change_Ones + "  one dollar bills");
+  
+        dollar_Amount = dollar_Amount + .001;// fix for pennies affects only odd number operations
+        
+        if((int)dollar_Amount == 0)// If modulus calculation for change amount (Line 50) = 0, calculation does not work
+        {
+        	dollar_Amount = dollar_Amount + 1.00;
+        }
+  
+        change_Amount =(int)((dollar_Amount % (int)dollar_Amount)*100);
+        
+        change_Quarters = (int)change_Amount / 25;
+        change_Amount = (int)change_Amount - ((int)change_Quarters * 25);
+        System.out.println(+ (int)change_Quarters +"  quarters");
+        
+        change_Dimes = ((int)change_Amount  / 10);
+        change_Amount = (int)change_Amount - ((int)change_Dimes * 10);
+        System.out.println(+(int)change_Dimes +"  dimes");
+        
+       change_Nickels = (int)(change_Amount / 5);
+       change_Amount = (int)change_Amount - ((int)change_Nickels * 5);
+       System.out.println(+(int)change_Nickels +"  nickels");
+       
+       change_Pennies = change_Amount + .1;
+       System.out.println(+(int)change_Pennies +"  Pennies");      
+    }
+}
